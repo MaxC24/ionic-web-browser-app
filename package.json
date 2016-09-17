@@ -2,6 +2,9 @@
   "name": "ionicbrowserapp",
   "version": "1.1.1",
   "description": "ionicBrowserApp: An Ionic project",
+  "scripts": {
+    "seed": "node server/seed.js"
+  },
   "dependencies": {
     "express": "^4.14.0",
     "gulp": "^3.5.6",
