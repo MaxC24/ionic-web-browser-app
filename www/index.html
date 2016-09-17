@@ -52,7 +52,18 @@
               <label class="item item-input-wrapper">
               <input type="text" placeholder="insert url" ng-model="url">
               </label>
-              <button class="button" ng-click="open()">ENTER</button>
+              <button class="button" ng-click="find()">FIND</button>
+            </div>
+          </div>
+          <div class="list" ng-show="found">
+            <div class="item item-button-right">
+              <button class="button button-positive" ng-click="connect()">CONNECT</button>
+              <i class="icon ion-star"> LINK FOUND</i>
+            </div>
+          </div>
+          <div class="list" ng-show='notFound'>
+            <div class="item item-button-right">
+              <i class="icon ion-close-circled"> LINK NOT FOUND</i>
             </div>
           </div>
         </div>

@@ -18,18 +18,25 @@ app.controller('BrowserCtrl', function($scope, $cordovaInAppBrowser, socket) {
     return url;
   }
 
-  $scope.open = function(){
+  $scope.find = function(){
     var url = $scope.url ? parseUrl($scope.url) : "http://www.google.com";
     socket.emit('sendUrl', {url : url});
   };
 
- socket.on('receivedUrl', function(foundUrl){
-    console.log('foundUrl: ', foundUrl);
-    $cordovaInAppBrowser.open(foundUrl.url ? foundUrl.url : "http://www.google.com", 'blank', options)
+  socket.on('receivedUrl', function(foundUrl){
+    $scope.notFound = false;
+    console.log(foundUrl)
+    if(foundUrl) $scope.found = foundUrl.url;
+    else $scope.notFound = true;
+  });
+
+  $scope.connect = function(){
+    console.log($scope.found)
+    $cordovaInAppBrowser.open($scope.found, 'blank', options)
     .then(function(event){
       console.log(event);
     })
     .catch(console.error.bind(console));
-  });
+  }
 
 });

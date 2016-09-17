@@ -13,8 +13,7 @@ io.on('connection', function(socket){
   socket.on('sendUrl', function(url){
     Url.findOne({url: url.url})
     .then(foundUrl => {
-      console.log('foundUrl: ', foundUrl);
-      socket.emit('receivedUrl', {url: foundUrl});
+      socket.emit('receivedUrl', foundUrl);
     })
     .catch(console.error.bind(console));
   });
