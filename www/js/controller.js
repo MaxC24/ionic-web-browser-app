@@ -19,22 +19,19 @@ app.controller('BrowserCtrl', function($scope, $cordovaInAppBrowser, socket) {
   }
 
   $scope.find = function(){
+    $scope.notFound = $scope.found = null;
     var url = $scope.url ? parseUrl($scope.url) : "http://www.google.com";
     socket.emit('sendUrl', {url : url});
   };
 
   socket.on('receivedUrl', function(foundUrl){
-    $scope.notFound = $scope.found = null;
     if(foundUrl) $scope.found = foundUrl.url;
     else $scope.notFound = true;
   });
 
   $scope.connect = function(){
     $cordovaInAppBrowser.open($scope.found, 'blank', options)
-    .then(function(event){
-      console.log(event);
-    })
-    .catch(console.error.bind(console));
-  }
+    $scope.found = null;
+  };
 
 });
