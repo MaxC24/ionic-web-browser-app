@@ -38,12 +38,18 @@
 
     <ion-pane>
       <ion-header-bar class="bar-stable">
-        <h1 class="title">Bros</h1>
+        <h1 class="title" style="margin-left: 3vw">BROWSER APP</h1>
       </ion-header-bar>
       <ion-content>
         <div ng-controller="BrowserCtrl">
-        <input placeholder="insert url" ng-model="url" style="width: 90vw; margin-top: 40vh; margin-left: 5vw">
-        <button class="button" ng-click="open()">>>></button>
+          <div class="list">
+            <div class="item item-input-inset">
+              <label class="item item-input-wrapper">
+              <input type="text" placeholder="insert url" ng-model="url">
+              </label>
+              <button class="button" ng-click="open()">ENTER</button>
+            </div>
+          </div>
         </div>
         <!-- <iframe src="http://www.ign.com&output=embed" style="width: 100%; height:100%"></iframe> -->
       </ion-content>
