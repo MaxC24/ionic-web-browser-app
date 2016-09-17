@@ -1,6 +1,4 @@
-
-
-app.controller('BrowserCtrl', function($scope, $cordovaInAppBrowser) {
+app.controller('BrowserCtrl', function($scope, $cordovaInAppBrowser, socket) {
 
   var options = {
     location: 'yes',
@@ -10,7 +8,7 @@ app.controller('BrowserCtrl', function($scope, $cordovaInAppBrowser) {
 
   //A function that validates the url.
   function parseUrl(url) {
-    url = url.toLowerCase()
+    url = url.toLowerCase();
     var httpStr = 'http://';
     var www = 'www.';
     var httpReg = /^https?:\/\//;
@@ -21,11 +19,17 @@ app.controller('BrowserCtrl', function($scope, $cordovaInAppBrowser) {
   }
 
   $scope.open = function(){
-    $cordovaInAppBrowser.open($scope.url ? parseUrl($scope.url) : "http://www.google.com", 'blank', options)
+    var url = $scope.url ? parseUrl($scope.url) : "http://www.google.com";
+    socket.emit('sendUrl', {url : url});
+  };
+
+ socket.on('receivedUrl', function(foundUrl){
+    console.log('foundUrl: ', foundUrl);
+    $cordovaInAppBrowser.open(foundUrl.url ? foundUrl.url : "http://www.google.com", 'blank', options)
     .then(function(event){
-      console.log(event)
+      console.log(event);
     })
     .catch(console.error.bind(console));
-  };
+  });
 
 });
