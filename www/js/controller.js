@@ -24,14 +24,12 @@ app.controller('BrowserCtrl', function($scope, $cordovaInAppBrowser, socket) {
   };
 
   socket.on('receivedUrl', function(foundUrl){
-    $scope.notFound = false;
-    console.log(foundUrl)
+    $scope.notFound = $scope.found = null;
     if(foundUrl) $scope.found = foundUrl.url;
     else $scope.notFound = true;
   });
 
   $scope.connect = function(){
-    console.log($scope.found)
     $cordovaInAppBrowser.open($scope.found, 'blank', options)
     .then(function(event){
       console.log(event);
